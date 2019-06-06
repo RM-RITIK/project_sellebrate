@@ -16,6 +16,10 @@
         .tm {
             margin-top: 20px;
         }
+        .or {
+          font-weight:bold;
+        }
+      
     
     </style>
   </head>
@@ -57,15 +61,15 @@
     <div class="form-inline form">
     <form class="form-group" action = "query.php">
     <label for="inputPassword6">From : </label>
-    <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "sdate" value = "<?php echo $_REQUEST['sdate']; ?>">
+    <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "sdate">
     <label for="inputPassword6">To : </label>
-    <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "edate" value = "<?php echo $_REQUEST['edate']; ?>">
+    <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "edate">
     <button type="submit" class="btn btn-primary">Show</button>
     </form>
     &nbsp;&nbsp;&nbsp;&nbsp;<div class = "or">OR</div>&nbsp;&nbsp;&nbsp;&nbsp;
     <form class="form-group" action = "query2.php">
     <label for="inputPassword6">Search by Name:</label>
-    <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "name">
+    <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "name" value = "<?php echo $_REQUEST['name']; ?>">
     <button type="submit" class="btn btn-primary">Show</button>
     </form>
     </div>
@@ -90,15 +94,9 @@ $link = mysqli_connect("localhost", "root", "", "add");
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
-$sdate = $_REQUEST['sdate'];
-$x = strtotime($sdate);
-$s = date("Y-m-d",$x);
-$edate = $_REQUEST['edate'];
-$y = strtotime($edate);
-$e = date("Y-m-d",$y);
+$name = $_REQUEST['name'];
 
-
-$sql = "SELECT * FROM attendance WHERE date>='$s' AND date<='$e'";
+$sql = "SELECT * FROM attendance WHERE name like ' $name'";
 $result = mysqli_query($link, $sql);
 
 if(mysqli_num_rows($result) > 0){

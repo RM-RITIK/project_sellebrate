@@ -20,6 +20,7 @@ if (isset($_POST["import"])) {
     $outTime = '';
     $totalTime = '';
     $attendance = '';
+    $name = '';
     
     if ($_FILES["file"]["size"] > 0) {
         
@@ -36,6 +37,8 @@ if (isset($_POST["import"])) {
             }
             if($i%10 == 1) {
                 $inTime = $column[$j];
+                $n = $column[0];
+                $name = str_replace("Name :","",$n);
             }
             if($i%10 == 2) {
                 $outTime = $column[$j];
@@ -51,7 +54,7 @@ if (isset($_POST["import"])) {
             }
             if($i%10 == 0 && $i !== 0) {
                 
-                $sql = "INSERT INTO attendance (staff_id, date, inTime, outTime, totalTime, attendance) VALUES ('$staffId', '$date', '$inTime', '$outTime', '$totalTime', '$attendance')";
+                $sql = "INSERT INTO attendance (name, staff_id, date, inTime, outTime, totalTime, attendance) VALUES ('$name', '$staffId', '$date', '$inTime', '$outTime', '$totalTime', '$attendance')";
                 mysqli_query($link, $sql);
             }
             $i++;

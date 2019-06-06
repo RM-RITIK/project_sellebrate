@@ -16,6 +16,10 @@
         .tm {
             margin-top: 20px;
         }
+        .or {
+          font-weight:bold;
+        }
+      
     
     </style>
   </head>
@@ -54,18 +58,25 @@
                  
                 </div>
     </nav>
-    <form class="form-inline form" action = "query.php">
-    <div class="form-group">
+    <div class="form-inline form">
+    <form class="form-group" action = "query.php">
     <label for="inputPassword6">From : </label>
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "sdate">
     <label for="inputPassword6">To : </label>
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "edate">
     <button type="submit" class="btn btn-primary">Show</button>
-    </div>
     </form>
+    &nbsp;&nbsp;&nbsp;&nbsp;<div class = "or">OR</div>&nbsp;&nbsp;&nbsp;&nbsp;
+    <form class="form-group" action = "query2.php">
+    <label for="inputPassword6">Search by Name:</label>
+    <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "name">
+    <button type="submit" class="btn btn-primary">Show</button>
+    </form>
+    </div>
 <table class="table tm">
   <thead>
     <tr>
+      <th scope = "col">Name</th>
       <th scope="col">Staff ID</th>
       <th scope="col">Date</th>
       <th scope="col">In Time</th>
@@ -91,6 +102,7 @@ if(mysqli_num_rows($result) > 0){
         
 ?>
 <tr>
+    <td><?php echo $row["name"]; ?></td>
     <td><?php echo $row["staff_id"]; ?></td>
     <td><?php echo $row["date"]; ?></td>
     <td><?php echo $row["inTime"]; ?></td>

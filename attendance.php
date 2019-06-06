@@ -72,6 +72,7 @@
       <th scope="col">In Time</th>
       <th scope="col">Out Time</th>
       <th scope="col">Total Time</th>
+      <th scope="col">Attendance</th>
     </tr>
   </thead>
   <tbody>
@@ -97,6 +98,7 @@ if(mysqli_num_rows($result) > 0){
     <td><?php echo $row["inTime"]; ?></td>
     <td><?php echo $row["outTime"]; ?></td>
     <td><?php echo $row["totalTime"]; ?></td>
+    <td><?php echo $row["attendance"]; ?></td>
 
 
 </tr>

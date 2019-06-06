@@ -28,6 +28,8 @@ if(mysqli_query($link, $sql)){
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
+header("Location: http://192.168.64.2/project/info.php"); 
+exit();
  
 // Close connection
 mysqli_close($link);

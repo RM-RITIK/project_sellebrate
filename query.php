@@ -16,9 +16,6 @@
         .tm {
             margin-top: 20px;
         }
-		.main {
-			margin-top:20px;
-		}
     
     </style>
   </head>
@@ -57,57 +54,70 @@
                  
                 </div>
     </nav>
-	<div class = "main">
-	<form class="form-horizontal" action="import.php" method="post" name="uploadCSV"
-    enctype="multipart/form-data">
-    <div class="input-row">
-        <label class="col-md-4 control-label">Choose CSV File:</label>
-		<input type="file" name="file" id="file" accept=".csv">
-		<label>Year:</label>
-		<select name="year">
-        <? for ($year=2014; $year <= 2030; $year++): ?>
-        <option value="<?=$year;?>"><?=$year;?></option>
-        <? endfor; ?>
-        </select>
-		<label>Month:</label>
-		<select name="month">
-        <? for ($month=1; $month <= 12; $month++): ?>
-        <option value="<?=$month;?>"><?=$month;?></option>
-        <? endfor; ?>
-        </select>
-        <button type="submit" id="submit" name="import"
-            class="btn-submit">Import</button>
-        <br />
-
+    <form class="form-inline form" action = "query.php">
+    <div class="form-group">
+    <label for="inputPassword6">From : </label>
+    <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "sdate" value = "<?php echo $_REQUEST['sdate'] ?>">
+    <label for="inputPassword6">To : </label>
+    <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "edate" value = "<?php echo $_REQUEST['edate'] ?>">
+    <button type="submit" class="btn btn-primary">Show</button>
     </div>
-    <div id="labelError"></div>
-</form>
-</div>
+    </form>
+<table class="table tm">
+  <thead>
+    <tr>
+    
+      <th scope="col">Staff ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">In Time</th>
+      <th scope="col">Out Time</th>
+      <th scope="col">Total Time</th>
+      <th scope="col">Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
 
-<script type="text/javascript">
-	$(document).ready(
-	function() {
-		$("#frmCSVImport").on(
-		"submit",
-		function() {
+$link = mysqli_connect("localhost", "root", "", "add");
+ 
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+$sdate = $_REQUEST['sdate'];
+$x = strtotime($sdate);
+$s = date("Y-m-d",$x);
+$edate = $_REQUEST['edate'];
+$y = strtotime($edate);
+$e = date("Y-m-d",$y);
 
-			$("#response").attr("class", "");
-			$("#response").html("");
-			var fileType = ".csv";
-			var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+("
-					+ fileType + ")$");
-			if (!regex.test($("#file").val().toLowerCase())) {
-				$("#response").addClass("error");
-				$("#response").addClass("display-block");
-				$("#response").html(
-						"Invalid File. Upload : <b>" + fileType
-								+ "</b> Files.");
-				return false;
-			}
-			return true;
-		});
-	});
-</script>
+
+$sql = "SELECT * FROM attendance WHERE date>='$s' AND date<='$e'";
+$result = mysqli_query($link, $sql);
+
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)) {
+        
+?>
+<tr>
+    <td><?php echo $row["staff_id"]; ?></td>
+    <td><?php echo $row["date"]; ?></td>
+    <td><?php echo $row["inTime"]; ?></td>
+    <td><?php echo $row["outTime"]; ?></td>
+    <td><?php echo $row["totalTime"]; ?></td>
+    <td><?php echo $row["attendance"]; ?></td>
+
+
+</tr>
+
+<?php 
+    }
+}
+mysqli_close($link);
+?>
+
+  </tbody>
+</table>
     
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -54,19 +54,18 @@
                  
                 </div>
     </nav>
-    <form class="form-inline form">
-  <div class="form-group">
+    <form class="form-inline form" action = "query.php">
+    <div class="form-group">
     <label for="inputPassword6">From : </label>
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "sdate">
     <label for="inputPassword6">To : </label>
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "edate">
     <button type="submit" class="btn btn-primary">Show</button>
-  </div>
-</form>
+    </div>
+    </form>
 <table class="table tm">
   <thead>
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">Staff ID</th>
       <th scope="col">Date</th>
       <th scope="col">In Time</th>
@@ -92,7 +91,6 @@ if(mysqli_num_rows($result) > 0){
         
 ?>
 <tr>
-    <td><?php echo $row["id"]; ?></td>
     <td><?php echo $row["staff_id"]; ?></td>
     <td><?php echo $row["date"]; ?></td>
     <td><?php echo $row["inTime"]; ?></td>

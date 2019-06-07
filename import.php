@@ -83,6 +83,7 @@ echo $name;
  
 $query = "CREATE TABLE $name (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    staffId INT(11),
     absentDays INT(11),
     presentDays INT(11),
     lateDays INT(11),

@@ -78,7 +78,22 @@ if (isset($_POST["import"])) {
     $j++;
     }
 }
+$name = "M".$month."_".$year;
+echo $name;
  
+$query = "CREATE TABLE $name (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    absentDays INT(11),
+    presentDays INT(11),
+    lateDays INT(11),
+    previousLeaveBalance INT(11),
+    netBalance INT(11))";
+
+if ($link->query($query) === TRUE) {
+    echo "Table MyGuests created successfully";
+} else {
+    echo "Error creating table: " . $link->error;
+}
 
 mysqli_close($link);
 header("Location: http://192.168.64.2/project/attendance.php"); 

@@ -1,14 +1,29 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+ 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Othenticate</title>
+    <style>
+        .form {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+       
+        .or {
+          font-weight:bold;
+        }
+
+        .tb {
+            margin-top: 20px;
+        }
+      
+    
+    </style>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,8 +34,7 @@
               
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                   
-                    <li class="nav-item dropdown">
+                  <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Staff
                       </a>
@@ -29,7 +43,8 @@
                         <a class="dropdown-item" href="form_1.html">Add</a>
                         
                       </div>
-                    </li>
+                  </li>
+                   
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Attendance
@@ -53,75 +68,31 @@
                  
                 </div>
     </nav>
-    <table class="table">
+    <div class="form-inline form">
+    <form class="form-group" action = "query3.php">
+    <label for="inputPassword6">Month :</label>
+    <input type="month" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "month">
+    <button type="submit" class="btn btn-primary">Show</button>
+    </form>
+    </div>
+
+<table class="table tb">
   <thead>
     <tr>
-      <th scope="col">Staff ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">E-mail</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Address</th>
-      <th scope="col">City</th>
-      <th scope="col">State</th>
-      <th scope="col">Role</th>
-      <th scope="col">Active</th>
-      <th scope="col">Joining Date</th>
-      <th scope="col">Total working hours</th>
-      <th scope="col">Salary</th>
-      <th scope="col">Action</th>
-      
-
+      <th scope="col">Staff Id</th>
+      <th scope="col">Absent Days</th>
+      <th scope="col">Present Days</th>
+      <th scope="col">Late Days</th>
+      <th scope = "col">Permitted Leaves</th>
+      <th scope = "col">Previous Leave Balance</th>
+      <th scope = "col">Net Balance</th>
 
     </tr>
   </thead>
   <tbody>
-  <?php
-
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
-$sql = "SELECT * FROM add_staff";
-$result = mysqli_query($link, $sql);
-
-if(mysqli_num_rows($result) > 0){
-    while($row = mysqli_fetch_assoc($result)) {
-        
-?>
-<tr>
-    <td><?php echo $row["staff_id"]; ?></td>
-    <td><?php echo $row["name"]; ?></td>
-    <td><?php echo $row["email"]; ?></td>
-    <td><?php echo $row["phone"]; ?></td>
-    <td><?php echo $row["address"]; ?></td>
-    <td><?php echo $row["city"]; ?></td>
-    <td><?php echo $row["state"]; ?></td>
-    <td><?php echo $row["role"]; ?></td>
-    <td><?php echo $row["active"]; ?></td>
-    <td><?php echo $row["jDate"]; ?></td>
-    <td><?php echo $row["totalWorkingHours"]; ?></td>
-    <td><?php echo $row["salary"]; ?></td>
-    <td> 
-    <a target="_blank" href="delete.php?staff_id=<?php echo $row['staff_id']; ?>">Delete</a>&nbsp;&nbsp;
-    <a target="_blank" href="update.php?staff_id=<?php echo $row['staff_id']; ?>">Update</a>
-
-
-  
- 
-    </td>
-
-</tr>
-
-<?php 
-    }
-}
-mysqli_close($link);
-?> 
-
   </tbody>
 </table>
+
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

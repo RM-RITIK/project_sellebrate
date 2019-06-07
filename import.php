@@ -86,6 +86,7 @@ $query = "CREATE TABLE $name (
     absentDays INT(11),
     presentDays INT(11),
     lateDays INT(11),
+    permittedLeaves INT(11),
     previousLeaveBalance INT(11),
     netBalance INT(11))";
 

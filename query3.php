@@ -103,6 +103,12 @@ $x = strtotime($month);
 $m = date("m", $x);
 $y = date("Y", $x);
 $mo = str_replace("0","",$m);
+$query = "SELECT * FROM report WHERE month = '$mo' AND year = '$y'";
+$_result = mysqli_query($link, $query);
+if(mysqli_num_rows($_result) == 0) {
+  echo "NO RECORD FOUND";
+  exit();
+}
 $sql = "SELECT * FROM add_staff";
 $result = mysqli_query($link, $sql);
 if(mysqli_num_rows($result) > 0){

@@ -10,6 +10,17 @@ if (isset($_POST["import"])) {
 
     $month = $_REQUEST['month'];
     $year = $_REQUEST['year'];
+    $ready = "SELECT * FROM report where month = '$month' and year = '$year'";
+    $h = mysqli_query($link, $ready);
+    if(mysqli_num_rows($h)>0) {
+        ?>
+        <script type = "text/javascript">
+        alert("RECORDS ALREADY EXISTS");
+        </script>
+        <?php
+        
+        exit();
+    }
     $fileName = $_FILES["file"]["tmp_name"];
     $j = 2;
     while($j<31){

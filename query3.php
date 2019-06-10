@@ -83,6 +83,7 @@
       <th scope="col">Absent Days</th>
       <th scope="col">Present Days</th>
       <th scope="col">Late Days</th>
+      <th scope="col">Half Days</th>
       <th scope = "col">Permitted Leaves</th>
       <th scope = "col">Previous Leave Balance</th>
       <th scope = "col">Net Balance</th>
@@ -90,6 +91,50 @@
     </tr>
   </thead>
   <tbody>
+  <?php 
+  $month = $_REQUEST['month'];
+  $link = mysqli_connect("localhost", "root", "", "add");
+ 
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+$x = strtotime($month);
+$m = date("m", $x);
+$y = date("Y", $x);
+$mo = str_replace("0","",$m);
+$sql = "SELECT * FROM add_staff";
+$result = mysqli_query($link, $sql);
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)) {
+      $staff_id = $row['staff_id'];
+      $a = "SELECT * FROM report WHERE staff_id = ' $staff_id' AND month = '$mo' AND year = '$y'";
+      $b = mysqli_query($link, $a);
+      $c = mysqli_fetch_assoc($b);
+      $d = "SELECT leaveBalance FROM add_staff WHERE staff_id = ' $staff_id'";
+      $e = mysqli_query($link, $d);
+      $f = mysqli_fetch_assoc($e);
+      $leaveBalance = $f['leaveBalance'];
+      $netBalance = $leaveBalance + 3 - $c['absentDays'];
+
+
+  ?>
+  <tr>
+  <td><?php echo $staff_id; ?></td>
+  <td><?php echo $c['absentDays']; ?></td>
+  <td><?php echo $c['presentDays']; ?></td>
+  <td><?php echo $c['lateDays']; ?></td>
+  <td><?php echo $c['halfDays']; ?></td>
+  <td>3</td>
+  <td><?php echo $leaveBalance; ?></td>
+  <td><?php echo $netBalance; ?></td>
+
+  </tr>
+
+  <?php
+    }
+  }
+  ?>
   </tbody>
 </table>
 

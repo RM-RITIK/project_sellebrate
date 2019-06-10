@@ -78,26 +78,46 @@ if (isset($_POST["import"])) {
     $j++;
     }
 }
-$name = "M".$month."_".$year;
-echo $name;
- 
-$query = "CREATE TABLE $name (
-    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    staffId INT(11),
-    absentDays INT(11),
-    presentDays INT(11),
-    lateDays INT(11),
-    permittedLeaves INT(11),
-    previousLeaveBalance INT(11),
-    netBalance INT(11))";
-
-if ($link->query($query) === TRUE) {
-    echo "Table MyGuests created successfully";
-} else {
-    echo "Error creating table: " . $link->error;
-}
 
 mysqli_close($link);
+
+?>
+
+<?php
+
+$link = mysqli_connect("localhost", "root", "", "add");
+ 
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+$sql = "SELECT * FROM add_staff";
+$result = mysqli_query($link, $sql);
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)) {
+        $staff_id = $row['staff_id'];
+        $a = "SELECT * FROM attendance WHERE staff_id = ' $staff_id' AND attendance = 'A' AND MONTH(date) = '$month'";
+        //echo $a;die;
+        $_result = mysqli_query($link, $a);
+        //print_r($_result);die;
+        $absent = mysqli_num_rows($_result);
+        $b = "SELECT * FROM attendance WHERE staff_id = ' $staff_id' AND attendance = 'P' AND MONTH(date) = '$month'";
+        $c = mysqli_query($link, $b);
+        $present = mysqli_num_rows($c);
+        $d = "SELECT * FROM attendance WHERE staff_id = ' $staff_id' AND attendance = 'P/2' AND MONTH(date) = '$month'";
+        $e = mysqli_query($link, $d);
+        $half = mysqli_num_rows($e);
+        $f = "SELECT * FROM attendance WHERE staff_id = ' $staff_id' AND inTime>'9:00' AND MONTH(date) = '$month'";
+        $g = mysqli_query($link, $f);
+        $late = mysqli_num_rows($g);
+
+        $query = "INSERT INTO report (staff_id, month, year, absentDays, presentDays, halfDays, lateDays) VALUES ('$staff_id', '$month', '$year', '$absent', '$present', '$half', '$late')";
+        mysqli_query($link, $query);
+    }
+}
 header("Location: http://192.168.64.2/project/attendance.php"); 
 exit();
+
 ?>
+
+

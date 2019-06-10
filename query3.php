@@ -90,52 +90,6 @@
     </tr>
   </thead>
   <tbody>
-  <?php
-
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
-$m = $_REQUEST['month'];
-$x = strtotime($m);
-$mon = date("m", $x);
-$month = str_replace("0","",$mon);
-$y = date("Y", $x);
-$year = substr($y, -2);
-$name = "M".$month."_".$y;
-$sql = "select 1 from `$name`"; 
-$val = mysqli_query($link , $sql);
-
-if($val !== FALSE)
-{
-    $sql = "SELECT * FROM $name";
-    $result = mysqli_query($link, $sql);
-
-    if(mysqli_num_rows($result) > 0){
-        while($row = mysqli_fetch_assoc($result)) {
- 
-
-?>
-<tr>
-    <td><?php echo $row["staffId"]; ?></td>
-    <td><?php echo $row["absentDays"]; ?></td>
-    <td><?php echo $row["presentDays"]; ?></td>
-    <td><?php echo $row["lateDays"]; ?></td>
-    <td><?php echo $row["permittedLeaves"]; ?></td>
-    <td><?php echo $row["previousLeaveBalance"]; ?></td>
-    <td><?php echo $row["netBalance"]; ?></td>
-
-</tr>
-<?php
-        }
-    }
-}
-else {
-    echo "NO RECORDS FOUND";
-}
-?>
   </tbody>
 </table>
 

@@ -25,6 +25,7 @@
       
     
     </style>
+
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -134,6 +135,7 @@ mysqli_close($link);
 ?>
 
   </tbody>
+
 </table>
 <script type = "text/javascript">
 function downloadCSV(csv, filename) {
@@ -177,7 +179,6 @@ function exportTableToCSV(filename) {
     // Download CSV file
     downloadCSV(csv.join("\n"), filename);
 }
-
 </script>
     
 

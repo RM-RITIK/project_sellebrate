@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Othenticate</title>
+    <style>
+      .exp {
+        margin-top: 10px;
+        margin-bottom:10px;
+        margin-left:10px;
+      }
+    </style>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -53,6 +60,11 @@
                  
                 </div>
     </nav>
+    <div class="form-inline form exp">
+    <form class="form-group ">
+    <button type="submit" class="btn btn-primary" onclick="exportTableToCSV('staffList.csv')">Download as CSV</button>
+    </form>
+    </div>
     <table class="table">
   <thead>
     <tr>
@@ -122,6 +134,51 @@ mysqli_close($link);
 
   </tbody>
 </table>
+<script type = "text/javascript">
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+}
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+
+</script>
+
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

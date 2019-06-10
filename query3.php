@@ -21,6 +21,9 @@
         .tb {
             margin-top: 20px;
         }
+        .exp {
+          margin-left: 40px;
+        }
       
     
     </style>
@@ -73,6 +76,9 @@
     <label for="inputPassword6">Month :</label>
     <input type="month" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "month" value = "<?php echo $_REQUEST['month']; ?>">
     <button type="submit" class="btn btn-primary">Show</button>
+    </form>
+    <form class="form-group exp" action="monthlyReport.php">
+    <button type="submit" class="btn btn-primary" onclick="exportTableToCSV('monthlyReport.csv')">Download as CSV</button>
     </form>
     </div>
 
@@ -143,6 +149,50 @@ if(mysqli_num_rows($result) > 0){
   ?>
   </tbody>
 </table>
+<script type = "text/javascript">
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+}
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+
+</script>
 
 
 

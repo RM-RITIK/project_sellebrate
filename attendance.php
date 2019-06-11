@@ -25,6 +25,18 @@
         .exp {
           margin-left:40px;
         }
+        .prev {
+          float:left;
+          margin-left: 10px;
+          margin-top:10px;
+          margin-bottom:10px;
+        }
+        .next {
+          float:left;
+          margin-left: 10px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
         
     
     </style>
@@ -115,7 +127,14 @@ $link = mysqli_connect("localhost", "root", "", "add");
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
-$sql = "SELECT * FROM attendance";
+if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
+  //we give the value of the starting row to 0 because nothing was found in URL
+  $startrow = 0;
+//otherwise we take the value from the URL
+} else {
+  $startrow = (int)$_GET['startrow'];
+}
+$sql = "SELECT * FROM attendance LIMIT $startrow, 15";
 $result = mysqli_query($link, $sql);
 
 if(mysqli_num_rows($result) > 0){
@@ -137,7 +156,16 @@ if(mysqli_num_rows($result) > 0){
 <?php 
     }
 }
-mysqli_close($link);
+$prev = $startrow - 15;
+
+//only print a "Previous" link if a "Next" was clicked
+if ($prev >= 0)
+    echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'" class = "prev btn btn-primary">Previous</a>';
+echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+15).'" class = "btn btn-primary next">Next</a>';
+
+
+
+
 ?>
 
   </tbody>

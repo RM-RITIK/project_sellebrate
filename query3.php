@@ -96,6 +96,7 @@
       <th scope="col">Present Days</th>
       <th scope="col">Late Days</th>
       <th scope="col">Half Days</th>
+      <th scope="col">Short Days</th>
       <th scope = "col">Permitted Leaves</th>
       <th scope = "col">Previous Leave Balance</th>
       <th scope = "col">Net Balance</th>
@@ -143,6 +144,7 @@ if(mysqli_num_rows($result) > 0){
   <td><?php echo $c['presentDays']; ?></td>
   <td><?php echo $c['lateDays']; ?></td>
   <td><?php echo $c['halfDays']; ?></td>
+  <td><?php echo $c['shortDays']; ?></td>
   <td>3</td>
   <td><?php echo $leaveBalance; ?></td>
   <td><?php echo $netBalance; ?></td>

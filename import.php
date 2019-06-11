@@ -121,8 +121,11 @@ if(mysqli_num_rows($result) > 0){
         $f = "SELECT * FROM attendance WHERE staff_id = ' $staff_id' AND inTime>'9:00' AND MONTH(date) = '$month'";
         $g = mysqli_query($link, $f);
         $late = mysqli_num_rows($g);
+        $j = "SELECT * FROM attendance WHERE staff_id = ' $staff_id' AND totalTime<'9:00' AND attendance = 'P'";
+        $k = mysqli_query($link, $j);
+        $short = mysqli_num_rows($k);
 
-        $query = "INSERT INTO report (staff_id, month, year, absentDays, presentDays, halfDays, lateDays) VALUES ('$staff_id', '$month', '$year', '$absent', '$present', '$half', '$late')";
+        $query = "INSERT INTO report (staff_id, month, year, absentDays, presentDays, halfDays, lateDays, shortDays) VALUES ('$staff_id', '$month', '$year', '$absent', '$present', '$half', '$late', '$short')";
         mysqli_query($link, $query);
     }
 }

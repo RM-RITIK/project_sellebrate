@@ -1,3 +1,35 @@
+<?php
+$link = mysqli_connect("localhost", "root", "", "add");
+ 
+// Check connection
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+session_start();
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+$username = $_POST['username'];
+$password = $_POST['password'];
+$sql = "SELECT * FROM users WHERE email = '$username' AND password = '$password'";
+$result = mysqli_query($link, $sql);
+$count = mysqli_num_rows($result);
+
+if($count == 1) {
+    $_SESSION['myusername']="something";
+    $_SESSION['login_user'] = $username;
+
+    header("location: http://192.168.64.2/project/attendance.php");
+
+
+}
+else {
+    
+    $error = "Your login name or password is invalid";
+    echo $error;
+}
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>

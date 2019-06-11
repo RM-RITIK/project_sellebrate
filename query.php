@@ -1,3 +1,6 @@
+<?php
+   include('session.php');
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -37,7 +40,7 @@
                       </a>
                       <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item " href="info.php">Staff List</a>
-                        <a class="dropdown-item" href="form_1.html">Add</a>
+                        <a class="dropdown-item" href="form_1.php">Add</a>
                         
                       </div>
                   </li>

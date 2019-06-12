@@ -35,6 +35,16 @@
                           <a class="dropdown-item " href="monthlyReport.php">Monthly Report</a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Trend Analysis
+                        </a>
+                        <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item " href="absent.php">Absent Trends</a>
+                          <a class="dropdown-item " href="late.php">Late Trends</a>
+                          <a class="dropdown-item " href="short.php">Short Days Trends</a>
+                        </div>
+                    </li>
                     
                   </ul>
                   <form class="form-inline" action = "logout.php">

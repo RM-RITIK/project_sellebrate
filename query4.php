@@ -30,14 +30,26 @@
              $mo = date("m", $x);
              $m = str_replace("0","", $mo);
              $y = date("Y", $x);
+             $link = mysqli_connect("localhost", "root", "", "add");
+            if($link === false){
+               die("ERROR: Could not connect. " . mysqli_connect_error());
+            }
+            $sql = "SELECT * FROM report WHERE month = '$m' AND year = '$y'";
+            $result = mysqli_query($link, $sql);
+            if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_assoc($result)) {
+                    echo "['$row[staff_id]', $row[absentDays]],";
+                    
+                }
+            }
 
             ?>
         ]);
 
      
         var options = {'title':'Absent Trends',
-                       'width':500,
-                       'height':300};
+                       'width':700,
+                       'height':900};
 
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         chart.draw(data, options);

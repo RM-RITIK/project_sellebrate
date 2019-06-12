@@ -48,12 +48,12 @@
   <thead>
     <tr>
       <th scope="col">Staff Id</th>
+      <th scope="col">Name</th>
       <th scope="col">Absent Days</th>
       <th scope="col">Present Days</th>
       <th scope="col">Late Days</th>
       <th scope="col">Half Days</th>
       <th scope="col">Short Days</th>
-      <th scope = "col">Permitted Leaves</th>
       <th scope = "col">Previous Leave Balance</th>
       <th scope = "col">Net Balance</th>
 
@@ -83,6 +83,7 @@ $result = mysqli_query($link, $sql);
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)) {
       $staff_id = $row['staff_id'];
+      $name = $row['name'];
       $a = "SELECT * FROM report WHERE staff_id = ' $staff_id' AND month = '$mo' AND year = '$y'";
       $b = mysqli_query($link, $a);
       $c = mysqli_fetch_assoc($b);
@@ -93,15 +94,16 @@ if(mysqli_num_rows($result) > 0){
       $netBalance = $leaveBalance + 3 - $c['absentDays'];
 
 
+
   ?>
   <tr>
   <td><?php echo $staff_id; ?></td>
+  <td><?php echo $name; ?></td>
   <td><?php echo $c['absentDays']; ?></td>
   <td><?php echo $c['presentDays']; ?></td>
   <td><?php echo $c['lateDays']; ?></td>
   <td><?php echo $c['halfDays']; ?></td>
   <td><?php echo $c['shortDays']; ?></td>
-  <td>3</td>
   <td><?php echo $leaveBalance; ?></td>
   <td><?php echo $netBalance; ?></td>
 

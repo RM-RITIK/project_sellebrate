@@ -43,12 +43,12 @@
   <thead>
     <tr>
       <th scope="col">Staff Id</th>
+      <th scope="col">Name</th>
       <th scope="col">Absent Days</th>
       <th scope="col">Present Days</th>
       <th scope="col">Late Days</th>
       <th scope="col">Half Days</th>
       <th scope="col">Short Days</th>
-      <th scope = "col">Permitted Leaves</th>
       <th scope = "col">Previous Leave Balance</th>
       <th scope = "col">Net Balance</th>
 

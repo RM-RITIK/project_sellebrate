@@ -68,8 +68,8 @@
 <table class="table tm">
   <thead>
     <tr>
-      <th scope = "col">Name</th>
       <th scope="col">Staff ID</th>
+      <th scope = "col">Name</th>
       <th scope="col">Date</th>
       <th scope="col">In Time</th>
       <th scope="col">Out Time</th>
@@ -101,8 +101,8 @@ if(mysqli_num_rows($result) > 0){
         
 ?>
 <tr>
-    <td><?php echo $row["name"]; ?></td>
     <td><?php echo $row["staff_id"]; ?></td>
+    <td><?php echo $row["name"]; ?></td>
     <td><?php echo $row["date"]; ?></td>
     <td><?php echo $row["inTime"]; ?></td>
     <td><?php echo $row["outTime"]; ?></td>

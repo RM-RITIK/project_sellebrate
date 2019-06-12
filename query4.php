@@ -23,6 +23,8 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Employee Name');
         data.addColumn('number', 'Absent Days');
+        data.addColumn('number', 'Late Days');
+        data.addColumn('number', 'Short Days');
         data.addRows([
            <?php
              $month = $_REQUEST['month'];
@@ -38,7 +40,13 @@
             $result = mysqli_query($link, $sql);
             if(mysqli_num_rows($result) > 0){
                 while($row = mysqli_fetch_assoc($result)) {
-                    echo "['$row[staff_id]', $row[absentDays]],";
+                    $staff_id = $row["staff_id"];
+                    $id = str_replace(" ","",$staff_id);
+                    $query = "SELECT * FROM add_staff WHERE staff_id = '$id'";
+                    $_result = mysqli_query($link, $query);
+                    $r = mysqli_fetch_assoc($_result);
+                    $name = $r['name'];
+                    echo "['$name', $row[absentDays], $row[lateDays], $row[shortDays]],";
                     
                 }
             }
@@ -47,13 +55,15 @@
         ]);
 
      
-        var options = {'title':'Absent Trends',
-                       'width':700,
-                       'height':900};
+        var options = {'title':'Trend Analysis',
+                       'width':1000,
+                       'height':1000
+                      };
 
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+      
     </script>
 
    
@@ -63,6 +73,11 @@
         margin-top:20px;
         margin-left:20px;
     }
+    .chart {
+    width: 100%; 
+    min-height: 450px;
+}
+
     </style>
 
     <title>Othenticate</title>
@@ -76,7 +91,12 @@
     <button type="submit" class="btn btn-primary">Show</button>
     </form>
     </div>
-    <div id="chart_div"></div>
+
+ <div class = "row">
+    <div class = "col-md-6">
+    <div id="chart_div" class = "chart"></div>
+ </div>   
+    
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

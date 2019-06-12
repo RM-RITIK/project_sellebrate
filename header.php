@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Othenticate</a>
+                <a class="navbar-brand" href="query4.php?month=2019-05">Othenticate</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -35,17 +35,7 @@
                           <a class="dropdown-item " href="monthlyReport.php">Monthly Report</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         Trend Analysis
-                        </a>
-                        <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item " href="absent.php">Absent Trends</a>
-                          <a class="dropdown-item " href="late.php">Late Trends</a>
-                          <a class="dropdown-item " href="short.php">Short Days Trends</a>
-                        </div>
-                    </li>
-                    
+                
                   </ul>
                   <form class="form-inline" action = "logout.php">
                   <button class="btn btn-outline-success my-2 my-sm-0" type = "submit">Logout</button>

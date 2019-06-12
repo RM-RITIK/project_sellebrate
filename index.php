@@ -17,7 +17,7 @@ if($count == 1) {
     $_SESSION['myusername']="something";
     $_SESSION['login_user'] = $username;
 
-    header("location: http://192.168.64.2/project/attendance.php");
+    header("location: http://192.168.64.2/project/query4.php?month=2019-05");
 
 
 }

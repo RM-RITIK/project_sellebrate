@@ -80,12 +80,6 @@
   <tbody>
   <?php
 
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
 if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   //we give the value of the starting row to 0 because nothing was found in URL
   $startrow = 0;

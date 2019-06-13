@@ -1,11 +1,6 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+require 'connection.php';
  
 $staffId = mysqli_real_escape_string($link, $_REQUEST['staffId']);
 $name = mysqli_real_escape_string($link, $_REQUEST['name']);
@@ -20,7 +15,7 @@ $jdate = mysqli_real_escape_string($link, $_REQUEST['jdate']);
 $time = mysqli_real_escape_string($link, $_REQUEST['time']);
 $salary = mysqli_real_escape_string($link, $_REQUEST['salary']);
 
-$sql = "INSERT INTO add_staff (staff_id, name , email, phone, address, city, state, role, jDate, totalWorkingHours, salary, active) VALUES ('$staffId', '$name', '$email', 
+$sql = "INSERT INTO staff (staff_id, name , email, phone, address, city, state, role, jDate, totalWorkingHours, salary, active) VALUES ('$staffId', '$name', '$email', 
 '$phone', '$address', '$city', '$state', '$role', '$jdate', '$time', '$salary', '$active')";
 
 if(mysqli_query($link, $sql)){

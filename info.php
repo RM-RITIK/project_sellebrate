@@ -42,8 +42,8 @@
       <th scope="col">Joining Date</th>
       <th scope="col">Total working hours</th>
       <th scope="col">Salary</th>
+
       <th scope="col">Action</th>
-      
 
 
     </tr>
@@ -51,13 +51,8 @@
   <tbody>
   <?php
 
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
-$sql = "SELECT * FROM add_staff";
+  
+$sql = "SELECT * FROM staff";
 $result = mysqli_query($link, $sql);
 
 if(mysqli_num_rows($result) > 0){

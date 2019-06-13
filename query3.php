@@ -61,13 +61,7 @@
   </thead>
   <tbody>
   <?php 
-  $month = $_REQUEST['month'];
-  $link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+$month = $_REQUEST['month'];
 $x = strtotime($month);
 $m = date("m", $x);
 $y = date("Y", $x);
@@ -78,7 +72,7 @@ if(mysqli_num_rows($_result) == 0) {
   echo "NO RECORD FOUND";
   exit();
 }
-$sql = "SELECT * FROM add_staff";
+$sql = "SELECT * FROM staff";
 $result = mysqli_query($link, $sql);
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)) {
@@ -87,7 +81,7 @@ if(mysqli_num_rows($result) > 0){
       $a = "SELECT * FROM report WHERE staff_id = ' $staff_id' AND month = '$mo' AND year = '$y'";
       $b = mysqli_query($link, $a);
       $c = mysqli_fetch_assoc($b);
-      $d = "SELECT leaveBalance FROM add_staff WHERE staff_id = ' $staff_id'";
+      $d = "SELECT leaveBalance FROM staff WHERE staff_id = ' $staff_id'";
       $e = mysqli_query($link, $d);
       $f = mysqli_fetch_assoc($e);
       $leaveBalance = $f['leaveBalance'];

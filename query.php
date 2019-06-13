@@ -60,12 +60,6 @@
   <tbody>
   <?php
 
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
 $sdate = $_REQUEST['sdate'];
 $x = strtotime($sdate);
 $s = date("Y-m-d",$x);

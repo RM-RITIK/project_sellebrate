@@ -1,10 +1,6 @@
 <?php
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+require 'connection.php';
+
 session_start();
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 $username = $_POST['username'];
@@ -16,7 +12,22 @@ $count = mysqli_num_rows($result);
 if($count == 1) {
     $_SESSION['myusername']="something";
     $_SESSION['login_user'] = $username;
+    $row = mysqli_fetch_assoc($result);
+    $role = $row['role'];
+    $query = "SELECT * FROM role WHERE role = '$role'";
+    $_result = mysqli_query($link, $query);
+    $r = mysqli_fetch_assoc($_result);
+    $role_id = $r['id'];
+    $a = "SELECT * FROM rp_mapping WHERE role_id = '$role_id'";
+    $b = mysqli_query($link, $a);
+    $permissions = array();
+    if(mysqli_num_rows($b) > 0) {
+        while($c = mysqli_fetch_assoc($b)) {
+            array_push($permissions, $c['permission_id']);
 
+        }
+    }
+    $_SESSION['permissions'] = $permissions;
     header("location: http://192.168.64.2/project/query4.php?month=2019-05");
 
 

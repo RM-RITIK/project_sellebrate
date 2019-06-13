@@ -19,14 +19,8 @@
 
   <?php
 
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
 $id = $_GET["staff_id"];
-$sql = "SELECT * FROM add_staff WHERE staff_id = '$id'";
+$sql = "SELECT * FROM staff WHERE staff_id = '$id'";
 $result = mysqli_query($link, $sql);
 if (mysqli_num_rows($result) > 0) {
     

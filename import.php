@@ -1,11 +1,7 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "add");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+require 'connection.php';
+
 if (isset($_POST["import"])) {
 
     $month = $_REQUEST['month'];
@@ -102,7 +98,7 @@ $link = mysqli_connect("localhost", "root", "", "add");
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
-$sql = "SELECT * FROM add_staff";
+$sql = "SELECT * FROM staff";
 $result = mysqli_query($link, $sql);
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)) {

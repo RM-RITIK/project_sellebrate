@@ -1,5 +1,5 @@
   <?php 
-  $link = mysqli_connect("localhost", "root", "", "add");
+  require 'connection.php';
  
   
   if($link === false){
@@ -8,7 +8,7 @@
             $id = $_GET["staff_id"];
             
             
-            $sql = "DELETE FROM add_staff WHERE staff_id= '$id' ";
+            $sql = "DELETE FROM staff WHERE staff_id= '$id' ";
             if (mysqli_query($link, $sql)) {
                 echo "Record deleted successfully";
                 

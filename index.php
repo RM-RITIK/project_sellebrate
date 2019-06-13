@@ -27,7 +27,16 @@ if($count == 1) {
 
         }
     }
-    $_SESSION['permissions'] = $permissions;
+    $p = array();
+    for($i = 0; $i<count($permissions); $i++) {
+        $x = $permissions[$i];
+        $c = "SELECT * FROM permissions WHERE id = '$x'";
+        $d = mysqli_query($link, $c);
+        $e = mysqli_fetch_assoc($d);
+         array_push($p, $e['permission']);
+    }
+    $_SESSION['permissions'] = $p;
+   
     header("location: http://192.168.64.2/project/query4.php?month=2019-05");
 
 

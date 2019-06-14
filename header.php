@@ -67,6 +67,9 @@
 
                 
                   </ul>
+                  <form class="form-inline">
+                  <a href = "LeavePolicy.pdf" class="btn btn-link" style = "" target = "_blank">Leave Policy </a>
+                  </form>
                   <form class="form-inline" action = "logout.php">
                   <button class="btn btn-outline-success my-2 my-sm-0" type = "submit">Logout</button>
                   </form>

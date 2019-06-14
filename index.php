@@ -14,6 +14,8 @@ if($count == 1) {
     $_SESSION['login_user'] = $username;
     $row = mysqli_fetch_assoc($result);
     $role = $row['role'];
+    $staff_id = $row['staff_id'];
+    $_SESSION['staff_id'] = $staff_id;
     $query = "SELECT * FROM role WHERE role = '$role'";
     $_result = mysqli_query($link, $query);
     $r = mysqli_fetch_assoc($_result);

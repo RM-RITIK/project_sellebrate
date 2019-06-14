@@ -87,7 +87,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 } else {
   $startrow = (int)$_GET['startrow'];
 }
+$p = $_SESSION['permissions'];
+$staff_id = $_SESSION['staff_id'];
+if(in_array("attendance_list_all", $p)) {
 $sql = "SELECT * FROM attendance LIMIT $startrow, 15";
+}
+elseif(in_array("attendance_list_particular", $p)) {
+  $sql = "SELECT * FROM attendance WHERE staff_id = ' $staff_id' LIMIT $startrow, 15";
+}
 $result = mysqli_query($link, $sql);
 
 if(mysqli_num_rows($result) > 0){

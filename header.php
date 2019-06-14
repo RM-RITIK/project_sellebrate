@@ -6,16 +6,33 @@
               
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
+                  <?php
+                  $p = $_SESSION['permissions'];
+                  if(in_array("staff_list_view", $p) || in_array("staff_add", $p) || in_array("staff_list_edit", $p)) {
+                  ?>
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Staff
                       </a>
                       <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
+                      <?php
+                      if(in_array("staff_list_view", $p) || in_array("staff_list_edit", $p)) { 
+                      ?>
                         <a class="dropdown-item " href="info.php">Staff List</a>
+                      <?php
+                      }
+                      ?>
+                      <?php if(in_array("staff_add", $p)) { ?>
                         <a class="dropdown-item" href="form_1.php">Add</a>
+                      <?php
+                      }
+                      ?>
                         
                       </div>
                   </li>
+                  <?php
+                  }
+                  ?>
                    
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,7 +40,12 @@
                       </a>
                       <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item " href="attendance.php">List</a>
+                        <?php 
+                        if(in_array("attendance_upload", $p)) {
+                          ?>
                         <a class="dropdown-item" href="upload.php">Upload</a>
+                        <?php }
+                        ?>
                         
                       </div>
                     </li>

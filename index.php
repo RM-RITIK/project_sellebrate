@@ -39,7 +39,7 @@ if($count == 1) {
     }
     $_SESSION['permissions'] = $p;
    
-    header("location: http://192.168.64.2/project/query4.php?month=2019-05");
+    header("location: query4.php?month=2019-05");
 
 
 }

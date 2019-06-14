@@ -54,12 +54,15 @@
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "edate">
     <button type="submit" class="btn btn-primary">Show</button>
     </form>
+    <?php 
+    if(in_array("attendance_list_all", $_SESSION['permissions'])) { ?>
     &nbsp;&nbsp;&nbsp;&nbsp;<div class = "or">OR</div>&nbsp;&nbsp;&nbsp;&nbsp;
     <form class="form-group" action = "query2.php">
     <label for="inputPassword6">Search by Name:</label>
     <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "name">
     <button type="submit" class="btn btn-primary">Show</button>
     </form>
+    <?php } ?>
     <form class="form-group exp">
     <button onclick="exportTableToCSV('attendance.csv')" type="submit" class="btn btn-primary">Download as CSV</button>
     </form>

@@ -1,6 +1,13 @@
 <?php
    include('session.php');
 ?>
+<?php
+if(!in_array("attendance_list_all", $_SESSION['permissions'])) {
+  echo "You do not have authorization to access this page";
+  header("location : attendance.php");
+  exit();
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>

@@ -35,12 +35,18 @@
     <input type="date" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "edate" value = "<?php echo $_REQUEST['edate']; ?>">
     <button type="submit" class="btn btn-primary">Show</button>
     </form>
+    <?php 
+    if(in_array("attendance_list_all", $_SESSION['permissions'])) {
+      ?>
     &nbsp;&nbsp;&nbsp;&nbsp;<div class = "or">OR</div>&nbsp;&nbsp;&nbsp;&nbsp;
     <form class="form-group" action = "query2.php">
     <label for="inputPassword6">Search by Name:</label>
     <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" name = "name">
     <button type="submit" class="btn btn-primary">Show</button>
     </form>
+    <?php
+    }
+    ?>
     <form class="form-group exp" action="attendance.php">
     <button type="submit" class="btn btn-primary" onclick="exportTableToCSV('attendanceDate.csv')">Download as CSV</button>
     </form>
@@ -66,9 +72,14 @@ $s = date("Y-m-d",$x);
 $edate = $_REQUEST['edate'];
 $y = strtotime($edate);
 $e = date("Y-m-d",$y);
-
-
+$p = $_SESSION['permissions'];
+$staff_id = $_SESSION['staff_id'];
+if(in_array("attendance_list_all", $p)) {
 $sql = "SELECT * FROM attendance WHERE date>='$s' AND date<='$e'";
+}
+elseif(in_array("attendance_list_particular", $p)) {
+  $sql = "SELECT * FROM attendance WHERE date>='$s' AND date<='$e' AND staff_id = ' $staff_id'";
+}
 $result = mysqli_query($link, $sql);
 
 if(mysqli_num_rows($result) > 0){

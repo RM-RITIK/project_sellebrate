@@ -1,5 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <?php if(in_array("trends", $_SESSION['permissions'])) { ?>
                 <a class="navbar-brand" href="query4.php?month=2019-05">Othenticate</a>
+                <?php } 
+                else {
+                  ?>
+                  <a class="navbar-brand" href="#">Othenticate</a>
+                <?php } ?>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>

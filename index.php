@@ -38,8 +38,12 @@ if($count == 1) {
          array_push($p, $e['permission']);
     }
     $_SESSION['permissions'] = $p;
-   
+   if(in_array("trends", $p)) {
     header("location: query4.php?month=2019-05");
+   }
+   else {
+       header("location: attendance.php");
+   }
 
 
 }

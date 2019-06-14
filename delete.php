@@ -15,6 +15,6 @@
             } else {
                 echo "Error deleting record: " . mysqli_error($link);
             }
-            header("Location: http://192.168.64.2/project/info.php"); 
+            header("Location: info.php"); 
             exit();
              ?>

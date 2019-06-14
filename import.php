@@ -125,7 +125,7 @@ if(mysqli_num_rows($result) > 0){
         mysqli_query($link, $query);
     }
 }
-header("Location: http://192.168.64.2/project/attendance.php"); 
+header("Location: attendance.php"); 
 exit();
 
 ?>

@@ -72,6 +72,7 @@ if(mysqli_num_rows($_result) == 0) {
   echo "NO RECORD FOUND";
   exit();
 }
+if(in_array("monthly_report_all", $_SESSION['permissions'])) {
 $sql = "SELECT * FROM staff";
 $result = mysqli_query($link, $sql);
 if(mysqli_num_rows($result) > 0){
@@ -81,7 +82,7 @@ if(mysqli_num_rows($result) > 0){
       $a = "SELECT * FROM report WHERE staff_id = ' $staff_id' AND month = '$mo' AND year = '$y'";
       $b = mysqli_query($link, $a);
       $c = mysqli_fetch_assoc($b);
-      $d = "SELECT leaveBalance FROM staff WHERE staff_id = ' $staff_id'";
+      $d = "SELECT leaveBalance FROM staff WHERE staff_id = '$staff_id'";
       $e = mysqli_query($link, $d);
       $f = mysqli_fetch_assoc($e);
       $leaveBalance = $f['leaveBalance'];
@@ -106,7 +107,34 @@ if(mysqli_num_rows($result) > 0){
   <?php
     }
   }
+}
+elseif(in_array("monthly_report_particular", $_SESSION['permissions'])) {
+  $staff_id = $_SESSION['staff_id'];
+  $a = "SELECT * FROM staff WHERE staff_id = '$staff_id'";
+  $b = mysqli_query($link, $a);
+  $c = mysqli_fetch_assoc($b);
+  $name = $c['name'];
+  $leaveBalance = $c['leaveBalance'];
+  $d = "SELECT * FROM report WHERE staff_id = ' $staff_id' AND month = '$mo' AND year = '$y'";
+  $e = mysqli_query($link, $d);
+  $f = mysqli_fetch_assoc($e);
+  $netBalance = $leaveBalance + 3 - $f['absentDays'];
+
   ?>
+    <tr>
+  <td><?php echo $staff_id; ?></td>
+  <td><?php echo $name; ?></td>
+  <td><?php echo $f['absentDays']; ?></td>
+  <td><?php echo $f['presentDays']; ?></td>
+  <td><?php echo $f['lateDays']; ?></td>
+  <td><?php echo $f['halfDays']; ?></td>
+  <td><?php echo $f['shortDays']; ?></td>
+  <td><?php echo $leaveBalance; ?></td>
+  <td><?php echo $netBalance; ?></td>
+
+  </tr>
+<?php }
+?>
   </tbody>
 </table>
 <?php include 'footer.php';?>
